@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "197410556985",
+    "project_id": "ma-chat-b8892",
+    "storage_bucket": "ma-chat-b8892.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:197410556985:android:e44d0fced39f43546bd1e8",
+        "android_client_info": {
+          "package_name": "com.example.machat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "197410556985-64vimsa96v5c45j7vd6lkr27ml27hn47.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjNqGOmCYkcfDKTHLAMdsfZL8j-HOg48s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "197410556985-64vimsa96v5c45j7vd6lkr27ml27hn47.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
