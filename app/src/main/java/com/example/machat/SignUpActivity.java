@@ -1,6 +1,7 @@
 package com.example.machat;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -28,13 +29,13 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        getSupportActionBar().hide();
 
-        dbURL="https://ma-chat-b8892-default-rtdb.europe-west1.firebasedatabase.app/";
         binding = ActivitySignUpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         mAuth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance();
+        database = FirebaseDatabase.getInstance("https://ma-chat-b8892-default-rtdb.europe-west1.firebasedatabase.app/");
 
         progressDialog = new ProgressDialog(SignUpActivity.this);
         progressDialog.setTitle("Creating Account");
@@ -55,7 +56,7 @@ public class SignUpActivity extends AppCompatActivity {
                                         Users user = new Users(binding.txtUsername.getText().toString(),binding.txtEmail.getText().toString(),binding.txtPassword.getText().toString());
                                         String id = task.getResult().getUser().getUid();
 
-                                        database.getReferenceFromUrl(dbURL).child("Users").child(id).setValue(user);
+                                        database.getReference().child("Users").child(id).setValue(user);
                                         Toast.makeText(SignUpActivity.this, "Sign up successful", Toast.LENGTH_SHORT).show();
                                     }
                                     else{
@@ -65,12 +66,19 @@ public class SignUpActivity extends AppCompatActivity {
                             });
                 }
                 else{
-                    Toast.makeText(SignUpActivity.this, "Enter Credentials", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, "Please fill out your credentials", Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
 
-        getSupportActionBar().hide();
+
+        binding.txtAlreadyHaveAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SignUpActivity.this,SignInActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
