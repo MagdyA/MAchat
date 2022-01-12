@@ -6,6 +6,10 @@ plugins {
 android {
     compileSdk 31
 
+    lintOptions {
+        abortOnError false
+    }
+
     defaultConfig {
         applicationId "com.example.machat"
         minSdk 16
