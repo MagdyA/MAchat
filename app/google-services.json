@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "197410556985",
+    "firebase_url": "https://ma-chat-b8892-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "ma-chat-b8892",
     "storage_bucket": "ma-chat-b8892.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "197410556985-a8bt39ef3e1vm8cudeqson80sp1kbhof.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.machat",
+            "certificate_hash": "64e2034c4d341e6bbf0c93b584473e02b9ea24a0"
+          }
+        },
         {
           "client_id": "197410556985-64vimsa96v5c45j7vd6lkr27ml27hn47.apps.googleusercontent.com",
           "client_type": 3

@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.machat.Models.User;
 import com.example.machat.databinding.ActivitySignInBinding;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -29,7 +30,8 @@ public class SignInActivity extends AppCompatActivity {
     ActivitySignInBinding binding;
     ProgressDialog progressDialog;
     FirebaseAuth mAuth;
-    FirebaseDatabase database;
+    FirebaseDatabase firebaseDatabase;
+    String dbURL = "https://ma-chat-b8892-default-rtdb.europe-west1.firebasedatabase.app/";
     GoogleSignInClient mGoogleSignInClient;
 
 
@@ -44,7 +46,7 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         mAuth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance("https://ma-chat-b8892-default-rtdb.europe-west1.firebasedatabase.app/");
+        firebaseDatabase = FirebaseDatabase.getInstance(dbURL);
 
         progressDialog = new ProgressDialog(SignInActivity.this);
         progressDialog.setTitle("Login");
@@ -87,6 +89,7 @@ public class SignInActivity extends AppCompatActivity {
                 }
             }
         });
+
         if(mAuth.getCurrentUser() != null){
             Intent intent = new Intent(SignInActivity.this,MainActivity.class);
             startActivity(intent);
@@ -103,7 +106,7 @@ public class SignInActivity extends AppCompatActivity {
         binding.btnGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                googleSignIn();
+                SignIn();
             }
         });
 
@@ -111,9 +114,9 @@ public class SignInActivity extends AppCompatActivity {
     }
 
 
-    // google sign in
+    /* google sign in */
     int RC_SIGN_IN = 65;
-    private void googleSignIn() {
+    private void SignIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -147,8 +150,15 @@ public class SignInActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("TAG", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+
+                            User user1 = new User();
+                            user1.setUserName(user.getDisplayName());
+                            user1.setProfilePic(user.getPhotoUrl().toString());
+                            firebaseDatabase.getReference().child("Users").child(user.getUid()).setValue(user1);
+
                             Intent intent = new Intent(SignInActivity.this,MainActivity.class);
                             startActivity(intent);
+
                             Toast.makeText(SignInActivity.this, "Signed in with Google", Toast.LENGTH_SHORT).show();
                         } else {
                             // If sign in fails, display a message to the user.

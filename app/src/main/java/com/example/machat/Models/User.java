@@ -1,12 +1,12 @@
 package com.example.machat.Models;
 
-public class Users {
+public class User {
     String profilePic,userName,mail,password,userId,lastMessage,status;
-    public Users(){
+    public User(){
 
     }
 
-    public Users(String profilePic, String userName, String mail, String password, String userId, String lastMessage, String status) {
+    public User(String profilePic, String userName, String mail, String password, String userId, String lastMessage, String status) {
         this.profilePic = profilePic;
         this.userName = userName;
         this.mail = mail;
@@ -16,7 +16,7 @@ public class Users {
         this.status = status;
     }
 
-    public Users(String userName, String mail, String password) {
+    public User(String userName, String mail, String password) {
         this.userName = userName;
         this.mail = mail;
         this.password = password;

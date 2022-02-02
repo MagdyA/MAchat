@@ -9,7 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.machat.Models.Users;
+import com.example.machat.Models.User;
 import com.example.machat.databinding.ActivitySignUpBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -19,7 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpActivity extends AppCompatActivity {
     ActivitySignUpBinding binding;
-    private String dbURL;
+    private String dbURL = "https://ma-chat-b8892-default-rtdb.europe-west1.firebasedatabase.app/";
     private FirebaseAuth mAuth;
     FirebaseDatabase database;
     ProgressDialog progressDialog;
@@ -35,7 +35,7 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         mAuth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance("https://ma-chat-b8892-default-rtdb.europe-west1.firebasedatabase.app/");
+        database = FirebaseDatabase.getInstance(dbURL);
 
         progressDialog = new ProgressDialog(SignUpActivity.this);
         progressDialog.setTitle("Creating Account");
@@ -53,7 +53,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     progressDialog.dismiss();
                                     if(task.isSuccessful()){
-                                        Users user = new Users(binding.txtUsername.getText().toString(),binding.txtEmail.getText().toString(),binding.txtPassword.getText().toString());
+                                        User user = new User(binding.txtUsername.getText().toString(),binding.txtEmail.getText().toString(),binding.txtPassword.getText().toString());
                                         String id = task.getResult().getUser().getUid();
 
                                         database.getReference().child("Users").child(id).setValue(user);
